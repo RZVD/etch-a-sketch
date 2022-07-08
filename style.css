@@ -16,6 +16,6 @@ html{
     height: auto;
     text-align: center;
     text-justify: center;
-    border: none;
-
+    border: solid;
+    border-color: black;
 }

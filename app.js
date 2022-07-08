@@ -1,35 +1,41 @@
 const GRID_DIMENSION = 16;
-
 const container = document.querySelector('.container');
 
+let grid = [];
 
-function initalize(){
-    createGrid()
+function initalize(grid){
+    createGrid(grid);
 }
-
-function placeSquare(square, i, j){
-        square.style.gridRowStart = i;
-        square.style.gridRowEnd = i + 1;
+function changeColor(square) {
+    square.style.backgroundColor = 'red'
+}
+function placeSquareAndListen(square, row, column){
+        square.classList.add('square');
+        square.classList.add(row + "_" + column);
+    
+    
+        square.style.gridRowStart = row;
+        square.style.gridRowEnd = row + 1;
             
-        square.style.gridColumnEnd = i + 1;
-        square.style.gridColumnEnd = j + 1;
-            
-            
+        square.style.gridColumnEnd = column;
+        square.style.gridColumnEnd = column + 1;
+        square.textContent = '[' + row + ']' + '[' + column + ']';
+        square.addEventListener('mouseover', () => {
+            changeColor(square);
+        });
 }
 
 function createGrid(){
-    for (let i = 0; i < GRID_DIMENSION; i++) {
-        for (let j = -0; j < GRID_DIMENSION; j++) {
+    for (let row = 0; row < GRID_DIMENSION; row++) {
+        let gridColumn = [];
+        for (let column = 0; column < GRID_DIMENSION; column++) {
             let square = document.createElement('div');
-            square.classList.add('square');
-            square.classList.add(i + "_" + j);
-            placeSquare(square, i, j);
-            square.textContent = '[' + i + ']' + '[' + j + ']';
-            
+            placeSquareAndListen(square, row, column);
             container.appendChild(square);
-
-        }        
+            gridColumn.push(square);
+        }
+        grid.push(gridColumn);       
     }
-
 }
+
 initalize()
