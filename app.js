@@ -2,13 +2,11 @@ const GRID_DIMENSION = 16;
 const container = document.querySelector('.container');
 
 let grid = [];
-
+let mouseButton;
 function initalize(grid){
     createGrid(grid);
 }
-function changeColor(square) {
-    square.style.backgroundColor = 'red'
-}
+
 function placeSquareAndListen(square, row, column){
         square.classList.add('square');
         square.classList.add(row + "_" + column);
@@ -19,10 +17,15 @@ function placeSquareAndListen(square, row, column){
             
         square.style.gridColumnEnd = column;
         square.style.gridColumnEnd = column + 1;
-        square.textContent = '[' + row + ']' + '[' + column + ']';
-        square.addEventListener('mouseover', () => {
-            changeColor(square);
-        });
+        //square.textContent = '[' + row + ']' + '[' + column + ']';
+        square.addEventListener('mouseover', changeColor);
+        square.addEventListener('mouseover', changeColor);
+
+
+}
+function changeColor(e) {
+    if(e.type === 'mouseover' && !mouseButton) return;
+    e.target.style.backgroundColor = 'red' 
 }
 
 function createGrid(){
@@ -37,5 +40,7 @@ function createGrid(){
         grid.push(gridColumn);       
     }
 }
+document.body.onmousedown = () => (mouseButton = true);
+document.body.onmouseup = () => (mouseButton = false);
 
 initalize()
