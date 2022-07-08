@@ -1,0 +1,21 @@
+body,
+html{
+    padding: 0px;
+    margin: 0px;
+}
+
+.container{
+    display: grid;
+    gap: 5px;
+    margin: 10px;
+}
+.square{
+    background-color: blueviolet;
+    color: white;
+    width: auto;
+    height: auto;
+    text-align: center;
+    text-justify: center;
+    border: none;
+
+}
