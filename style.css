@@ -12,6 +12,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 .container{
     display: grid;
@@ -29,8 +30,6 @@ body{
     height: auto;
     text-align: center;
     text-justify: center;
-    /* border: solid;
-    border-color: black; */
     height: auto;
     width: auto;
     margin: 0px;
@@ -39,11 +38,13 @@ body{
     -webkit-appearance: slider-vertical;
     height:300px;
     margin-right: 0px;
+    width: 10px;
     
 }
 .slider_box{
     display: flex;
     align-items: center;
+    
 }
 .content{
     margin: auto;
