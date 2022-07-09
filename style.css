@@ -4,10 +4,19 @@ html{
     margin: 0px;
 }
 
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .container{
     display: grid;
-    gap: 5px;
-    margin: 10px;
+    gap: 0px;
+    margin: 0px;
+    border : solid;
+    border-color: black;
+    width: 500px;
+    height: 500px;
 }
 .square{
     background-color: blueviolet;
@@ -16,8 +25,12 @@ html{
     height: auto;
     text-align: center;
     text-justify: center;
-    border: solid;
-    border-color: black;
-    height: 25px;
-    width: 25px;
+    /* border: solid;
+    border-color: black; */
+    height: auto;
+    width: auto;
+    margin: 0px;
+}
+input{
+
 }

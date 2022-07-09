@@ -1,10 +1,15 @@
-const GRID_DIMENSION = 16;
+const INITIAL_GRID_DIMENSION = 16;
 const container = document.querySelector('.container');
+let gridDimension = INITIAL_GRID_DIMENSION;
+
+const slider = document.querySelector('.slider');
+console.log(slider.value);
 
 let grid = [];
 let mouseButton;
-function initalize(grid){
-    createGrid(grid);
+
+function initalize(){
+    createGrid();
 }
 
 function placeSquareAndListen(square, row, column){
@@ -19,7 +24,7 @@ function placeSquareAndListen(square, row, column){
         square.style.gridColumnEnd = column + 1;
         //square.textContent = '[' + row + ']' + '[' + column + ']';
         square.addEventListener('mouseover', changeColor);
-        square.addEventListener('mouseover', changeColor);
+        square.addEventListener('mousedown', changeColor);
 
 
 }
@@ -29,18 +34,32 @@ function changeColor(e) {
 }
 
 function createGrid(){
-    for (let row = 0; row < GRID_DIMENSION; row++) {
-        let gridColumn = [];
-        for (let column = 0; column < GRID_DIMENSION; column++) {
+    for (let row = 0; row < gridDimension; row++) {
+        for (let column = 0; column < gridDimension; column++) {
             let square = document.createElement('div');
             placeSquareAndListen(square, row, column);
             container.appendChild(square);
-            gridColumn.push(square);
+            grid.push(square);
         }
-        grid.push(gridColumn);       
     }
+}
+function destroyGrid(){
+    let n = grid.length;
+    for (let i = 0; i < n; i++) {
+        let element = grid.shift();
+        container.removeChild(element);
+        
+    }
+    
 }
 document.body.onmousedown = () => (mouseButton = true);
 document.body.onmouseup = () => (mouseButton = false);
+
+slider.addEventListener('click', () =>{
+    destroyGrid();
+    gridDimension = slider.value;
+    createGrid();
+    
+});
 
 initalize()
