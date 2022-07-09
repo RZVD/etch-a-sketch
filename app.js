@@ -1,6 +1,12 @@
 const INITIAL_GRID_DIMENSION = 16;
 const container = document.querySelector('.container');
 let gridDimension = INITIAL_GRID_DIMENSION;
+let sliderText = document.createElement('p');
+sliderText.style.position = 'absolute';
+sliderText.textContent = gridDimension + 'X' + gridDimension;
+
+const sliderBox = document.querySelector('.slider_box');
+sliderBox.appendChild(sliderText);
 
 const slider = document.querySelector('.slider');
 console.log(slider.value);
@@ -55,11 +61,11 @@ function destroyGrid(){
 document.body.onmousedown = () => (mouseButton = true);
 document.body.onmouseup = () => (mouseButton = false);
 
-slider.addEventListener('click', () =>{
+slider.addEventListener('input', () =>{ 
     destroyGrid();
     gridDimension = slider.value;
+    sliderText.textContent = gridDimension + 'X' + gridDimension;
     createGrid();
-    
 });
 
 initalize()

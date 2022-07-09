@@ -6,6 +6,7 @@ html{
 
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -31,6 +32,62 @@ body{
     width: auto;
     margin: 0px;
 }
-input{
+.slider{
+    -webkit-appearance: slider-vertical;
+    height:300px;
+    margin-right: 0px;
+    
+}
+.slider_box{
+    display: flex;
+    align-items: center;
+}
+.content{
+    width: 100%;
+    display:flex;
+    justify-content: space-evenly;
+    
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
 
+header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(190, 43, 38);
+}
+header>p{
+    color: white;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+li>button{
+    border: solid;
+    border-radius: 20px 20px 20px 20px ;
+    background-color:transparent;
+    text-align: center;
+    width : 75px;
+    height: 35px;
+}
+#colorpicker{
+    
+    border-radius: 100% 100% 100% 100%;
+    height: 75px;
+    width: 75px;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    background-color: inherit;
 }
