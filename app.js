@@ -17,10 +17,11 @@ const footer = document.querySelector('footer');
 const colorPicker = document.querySelector('#colorpicker');
 colorPicker.style.backgroundColor = colorPicker.value; 
 
-let colorButton = document.querySelector('.color');
-let rainbowButton = document.querySelector('.rainbow');
-let eraserButton = document.querySelector('.eraser');
-let clearButton = document.querySelector('.clear');
+const colorButton = document.querySelector('.color');
+const rainbowButton = document.querySelector('.rainbow');
+const eraserButton = document.querySelector('.eraser');
+const clearButton = document.querySelector('.clear');
+const shadeButton = document.querySelector('.shade');
 
 let currColor = '#d3d3d3';
 
@@ -28,7 +29,7 @@ let currColor = '#d3d3d3';
 let mode = 'color';
 
 
-let buttons = [colorButton, rainbowButton, eraserButton, clearButton];
+let buttons = [colorButton, rainbowButton, eraserButton, clearButton, shadeButton];
 
 function initalize(){
     sliderText.style.position = 'relative';
@@ -56,6 +57,8 @@ function placeSquareAndListen(square, row, column){
     square.style.gridColumnEnd = column;
     square.style.gridColumnEnd = column + 1;
     
+    square.style.backgroundColor = 'rgb(255, 255, 255)';
+
     square.addEventListener('mouseover', changeColor);
     square.addEventListener('mousedown', changeColor);
 
@@ -66,7 +69,19 @@ function randomColor(){
     let G = Math.floor(Math.random() * 255);
     let B = Math.floor(Math.random() * 255);
 
-    return `rgb(${R},${G},${B})` ;
+    return `rgb(${R}, ${G}, ${B})` ;
+}
+
+function darkenColor(color){
+    let n = color.substr(4).length;
+    let RGB_String = color.substr(4).
+    substr(0, n - 1).
+    split(', ').
+    map(x => parseInt(x));
+
+    let RGB = RGB_String.map(x => Math.floor(0.75 * x));
+
+    return `rgb(${RGB[0]},${RGB[1]},${RGB[2]})` ;
 }
 
 function changeColor(e) {
@@ -80,11 +95,15 @@ function changeColor(e) {
             e.target.style.backgroundColor = randomColor();
             break;
         case 'eraser':
-            e.target.style.backgroundColor = 'white';
+            e.target.style.backgroundColor = 'rgb(255, 255, 255)';
             break;
+        case 'shade':
+            let squareColor = e.target.style.backgroundColor;
+            e.target.style.backgroundColor = darkenColor(squareColor);
     }
-
 }
+
+
 
 function createGrid(){
     for (let row = 0; row < gridDimension; row++) {
@@ -142,14 +161,21 @@ rainbowButton.addEventListener('click', () =>{
 });
 
 eraserButton.addEventListener('click', () =>{
-    mode = 'eraser'
+    mode = 'eraser';
     highlightButton(eraserButton);
 
 });
 
 clearButton.addEventListener('click', () =>{
     grid.forEach(square => {
-        square.style.backgroundColor = 'white';
+        square.style.backgroundColor = 'rgb(255, 255, 255)';
     });
-})
+});
+shadeButton.addEventListener('click', () =>{
+    mode = 'shade';
+    highlightButton(shadeButton);
+
+});
+
+
 initalize()
