@@ -27,6 +27,9 @@ let currColor = '#d3d3d3';
 
 let mode = 'color';
 
+
+let buttons = [colorButton, rainbowButton, eraserButton, clearButton];
+
 function initalize(){
     sliderText.style.position = 'relative';
     sliderText.style.right = '80px';
@@ -38,23 +41,23 @@ function initalize(){
     let copyrightP = document.createElement('p');
     copyrightP.textContent = copyright
     footer.appendChild(copyrightP);
-    
+    highlightButton(colorButton);
     createGrid();
 
 }
 
 function placeSquareAndListen(square, row, column){
-        square.classList.add('square');
-        square.classList.add(row + "_" + column);
+    square.classList.add('square');
+    square.classList.add(row + "_" + column);
     
-    
-        square.style.gridRowStart = row;
-        square.style.gridRowEnd = row + 1;
+    square.style.gridRowStart = row;
+    square.style.gridRowEnd = row + 1;
             
-        square.style.gridColumnEnd = column;
-        square.style.gridColumnEnd = column + 1;
-        square.addEventListener('mouseover', changeColor);
-        square.addEventListener('mousedown', changeColor);
+    square.style.gridColumnEnd = column;
+    square.style.gridColumnEnd = column + 1;
+    
+    square.addEventListener('mouseover', changeColor);
+    square.addEventListener('mousedown', changeColor);
 
 }
 
@@ -78,11 +81,8 @@ function changeColor(e) {
             break;
         case 'eraser':
             e.target.style.backgroundColor = 'white';
-            
             break;
-
     }
-    
 
 }
 
@@ -96,22 +96,31 @@ function createGrid(){
         }
     }
 }
+
 function destroyGrid(){
     let n = grid.length;
     for (let i = 0; i < n; i++) {
         let element = grid.shift();
         container.removeChild(element);
         
-    }
-    
+    }   
 }
+function highlightButton(button){
+    buttons.forEach(element => {
+        element.style.backgroundColor = 'white';
+        element.style.color = 'black';
 
+    });
+    
+    button.style.backgroundColor = 'black';
+    button.style.color = 'ivory';
 
+}
 
 slider.addEventListener('input', () =>{ 
     destroyGrid();
     gridDimension = slider.value;
-    sliderText.textContent = gridDimension + 'X' + gridDimension;
+    sliderText.textContent = gridDimension + ' X ' + gridDimension;
     createGrid();
 });
 
@@ -122,17 +131,20 @@ colorPicker.addEventListener('input', () =>{
 });
 
 colorButton.addEventListener('click', () =>{
-    
     mode = 'color';
+    highlightButton(colorButton);
 });
 
 rainbowButton.addEventListener('click', () =>{
     mode = 'rainbow';
+    highlightButton(rainbowButton);
+
 });
 
 eraserButton.addEventListener('click', () =>{
-
     mode = 'eraser'
+    highlightButton(eraserButton);
+
 });
 
 clearButton.addEventListener('click', () =>{

@@ -111,7 +111,6 @@ footer>p{
     overflow: hidden;
     border: none;
     cursor: pointer;
-    outline-color: black;
     padding: 0px;
     -webkit-appearance: none;
     
@@ -121,4 +120,8 @@ footer>p{
 }
 #colorpicker::-moz-color-swatch {
     border-color: transparent;
-  }
+}
+
+button:hover{
+    transform: scale(1.1);
+}
