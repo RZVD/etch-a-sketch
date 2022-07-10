@@ -41,6 +41,8 @@ body{
     width: 10px;
     
 }
+
+
 .slider_box{
     display: flex;
     align-items: center;
@@ -121,7 +123,9 @@ footer>p{
 #colorpicker::-moz-color-swatch {
     border-color: transparent;
 }
-
+#colorpicker:hover{
+    transform: scale(1.1);
+}
 button:hover{
     transform: scale(1.1);
 }
